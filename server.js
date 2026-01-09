@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
@@ -14,6 +15,9 @@ const uploadDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
+
+// Enable CORS for any origin (open to all)
+app.use(cors());
 
 // Upload endpoint
 app.post('/upload', upload.single('file'), (req, res) => {
